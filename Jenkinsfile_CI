@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello') {
+        stage('Descarga de Fuentes') {
             steps {
 				echo 'Incia Pipeline'
                 echo 'Descarga Repositorio'
@@ -23,12 +23,14 @@ pipeline {
         }
 		stage('Analisis estatico de codigo') {
             steps {
+				echo 'Inicia Análisis de Código Estático'
 				withCredentials([string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN')]) {
 					echo 'Incia Analisis estatico'                
 					bat 'gradlew sonarqube'				
 					echo 'Termina Analisis estatico'
 				}
-                
+                echo 'Termina Análisis de Código Estático'
+				echo 'Termina Pipeline'
             }			
         }
     }
