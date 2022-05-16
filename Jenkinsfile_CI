@@ -1,0 +1,35 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Hello') {
+            steps {
+				echo 'Incia Pipeline'
+                echo 'Descarga Repositorio'
+                checkout([$class: 'GitSCM', branches: [[name: '*/trunk']], extensions: [], userRemoteConfigs: [[credentialsId: 'GitHubAtuwaku', url: 'https://github.com/ATUWAKU/appGateMobile.git']]])
+				echo 'Termina Descarga Repositorio'
+            }
+        }
+		stage('Compilacion') {
+            steps {				
+                echo 'Incia Compilacion'
+                echo 'Comando Clean'
+				bat 'gradlew clean'
+				echo 'Termina Comando Clean'
+				echo 'Comando Build -x test'
+				bat 'gradlew build -x test'
+				echo 'Termina Comando Build -x test'
+            }			
+        }
+		stage('Analisis estatico de codigo') {
+            steps {
+				withCredentials([string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN')]) {
+					echo 'Incia Analisis estatico'                
+					bat 'gradlew sonarqube'				
+					echo 'Termina Analisis estatico'
+				}
+                
+            }			
+        }
+    }
+}
