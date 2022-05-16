@@ -1,10 +1,8 @@
-package com.appgate.prueba.tasks;
+package com.appgate.prueba.interactions;
 
-import com.appgate.prueba.interactions.Verify;
 import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.Interaction;
 import net.serenitybdd.screenplay.Performable;
-
-import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.conditions.Check;
 
@@ -14,16 +12,16 @@ import static com.appgate.prueba.userInterfaces.Coordinates.CONSULT_COORDINATES_
 import static com.appgate.prueba.userInterfaces.Coordinates.GRANT_PERMI_BUTTON;
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 
-public class Request implements Task {
-    public static Performable coordinates() {
-        return instrumented(Request.class);
+public class Verify implements Interaction {
+    public static Performable permissions() {
+        return instrumented(Verify.class);
     }
 
     @Override
     public <T extends Actor> void performAs(T actor) {
-        actor.attemptsTo(
-                Click.on(CONSULT_COORDINATES_BUTTON),
-                Verify.permissions()
-        );
+        actor.attemptsTo(Check.whether(GRANT_PERMI_BUTTON.waitingForNoMoreThan(Duration.ofSeconds(60)).isVisibleFor(actor)).andIfSo(
+                Click.on(GRANT_PERMI_BUTTON),
+                Click.on(CONSULT_COORDINATES_BUTTON)
+        ));
     }
 }
