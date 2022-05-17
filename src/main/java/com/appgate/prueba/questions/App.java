@@ -15,7 +15,7 @@ public class App implements Question<Boolean> {
     @Override
     public Boolean answeredBy(Actor actor) {
         return
-                !LATIN.resolveFor(actor).isVisible() &&
+                LATIN.resolveFor(actor).isVisible() &&
                 LNGIN.resolveFor(actor).isVisible() &&
                 LATIN.resolveFor(actor).getText().equals("") &&
                 LNGIN.resolveFor(actor).getText().equals("") &&

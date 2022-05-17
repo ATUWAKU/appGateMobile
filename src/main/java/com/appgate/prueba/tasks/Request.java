@@ -1,5 +1,6 @@
 package com.appgate.prueba.tasks;
 
+import com.appgate.prueba.interactions.TurnOn;
 import com.appgate.prueba.interactions.Verify;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
@@ -22,6 +23,7 @@ public class Request implements Task {
     @Override
     public <T extends Actor> void performAs(T actor) {
         actor.attemptsTo(
+                TurnOn.gps(),
                 Click.on(CONSULT_COORDINATES_BUTTON),
                 Verify.permissions()
         );
