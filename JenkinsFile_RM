@@ -3,12 +3,26 @@ pipeline {
 	triggers {
 		upstream 'appGateMobile_CI, '
 	}
-
     stages {
         stage('Ejecucion') {
-            steps {				                
-				bat 'gradlew clean build test aggregate'
-            }			
+            steps {         
+				echo 'Inicia la ejecucion'
+				bat 'gradlew clean build test aggregate'				
+				echo 'Termina Ejecucion'
+            }
         }
+		stage('Email') {
+			steps {				
+				echo 'Inicia Envio de Email'
+				script {					
+					emailext body: '''Se ha ejecutado el ${PROJECT_NAME}\n					
+					Resultado: ${BUILD_STATUS}''',					
+					subject: "Resultado ${PROJECT_NAME}",
+					to: "david_muner@hotmail.com"
+				}
+				echo 'Termina Envio de Email'
+			}
+		}
+		
     }
 }
