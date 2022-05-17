@@ -1,8 +1,8 @@
 package com.appgate.prueba.exceptions;
 
 public class RestartException extends AssertionError {
-    private static final String MSG = "La función reiniciar está fallando";
-    public RestartException() {
-        super(MSG);
+    public static final String MSGRESTEXCEP = "La funcion reiniciar esta fallando";
+    public RestartException(String message, Throwable cause) {
+        super(message, cause);
     }
 }

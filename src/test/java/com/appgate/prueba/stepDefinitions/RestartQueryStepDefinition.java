@@ -9,10 +9,12 @@ import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actors.OnlineCast;
 
+import static com.appgate.prueba.exceptions.RestartException.MSGRESTEXCEP;
 import static com.appgate.prueba.userInterfaces.TimeZone.RESET_BUTTON;
 import static com.appgate.prueba.utils.constants.General.YISUS;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.actors.OnStage.*;
+import static org.hamcrest.Matchers.equalTo;
 
 public class RestartQueryStepDefinition {
 
@@ -32,7 +34,7 @@ public class RestartQueryStepDefinition {
     @Then("The system returns and changes its state to consult coordinates")
     public void theSystemReturnsAndChangesItsStateToConsultCoordinates() {
         theActorInTheSpotlight().should(seeThat(
-                App.isReset()
-        ).orComplainWith(RestartException.class));
+                App.isReset(), equalTo(true)
+        ).orComplainWith(RestartException.class, MSGRESTEXCEP));
     }
 }

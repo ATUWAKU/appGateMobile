@@ -8,10 +8,12 @@ import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actors.OnlineCast;
 
+import static com.appgate.prueba.exceptions.ConsultTimeZoneException.MSGCONSTIZONEXCP;
 import static com.appgate.prueba.userInterfaces.Coordinates.SEND_BUTTON;
 import static com.appgate.prueba.utils.constants.General.YISUS;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.actors.OnStage.*;
+import static org.hamcrest.Matchers.equalTo;
 
 public class TimeZoneDataQueryStepDefinition {
 
@@ -29,7 +31,7 @@ public class TimeZoneDataQueryStepDefinition {
     @Then("The APP displays the information")
     public void theAPPDisplaysTheInformation() {
         theActorInTheSpotlight().should(seeThat(
-                Information.appear()
-        ).orComplainWith(ConsultTimeZoneException.class));
+                Information.appear(), equalTo(true)
+        ).orComplainWith(ConsultTimeZoneException.class, MSGCONSTIZONEXCP));
     }
 }

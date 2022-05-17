@@ -14,7 +14,7 @@ public class Information implements Question<Boolean> {
     @Override
     public Boolean answeredBy(Actor actor) {
         return
-                !SUNRISE.resolveFor(actor).getText().equals("") &&
+                SUNRISE.resolveFor(actor).getText().equals("") &&
                 !LNG.resolveFor(actor).getText().equals("") &&
                 !COUNTRYCODE.resolveFor(actor).getText().equals("") &&
                 !GMTOFFSET.resolveFor(actor).getText().equals("") &&
