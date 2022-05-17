@@ -19,7 +19,7 @@ public class Verify implements Interaction {
 
     @Override
     public <T extends Actor> void performAs(T actor) {
-        actor.attemptsTo(Check.whether(GRANT_PERMI_BUTTON.waitingForNoMoreThan(Duration.ofSeconds(60)).isVisibleFor(actor)).andIfSo(
+        actor.attemptsTo(Check.whether(GRANT_PERMI_BUTTON.waitingForNoMoreThan(Duration.ofSeconds(3)).isVisibleFor(actor)).andIfSo(
                 Click.on(GRANT_PERMI_BUTTON),
                 Click.on(CONSULT_COORDINATES_BUTTON)
         ));
