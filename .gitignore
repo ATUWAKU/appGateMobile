@@ -5,7 +5,6 @@ target/
 null/
 ### Android ###
 # Built application files
-*.apk
 *.ap_
 *.aab
 # Files for the ART/Dalvik VM
