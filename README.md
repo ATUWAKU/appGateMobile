@@ -37,7 +37,7 @@ Para correr la automatización de forma local se debe:
 5. Tener sin comentarios las capabilities **LOCAL** del archivo serenity.properties
 6. Se debe modificar la capability appium.app. Deben poner la direcció donde esté el APK
 
-###En la granja de Kobiton
+###En Granjas de dispotivos -> Kobiton
 1. Instalar [Java](https://openjdk.java.net/projects/jdk/11) y configurar la [varialbe de entorno](https://www.java.com/es/download/help/path_es.html)
 2. Instalar [Gradle](https://gradle.org/releases) y su [variable de entorno configurada]((https://gradle.org/install/#manually))
 3. Tener sin comentarios las capabilities **KOBITON** del archivo serenity.properties
